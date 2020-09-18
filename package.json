@@ -1,0 +1,20 @@
+{
+  "name": "node-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "ricqrdo <ricqrdo-@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

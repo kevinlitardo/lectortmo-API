@@ -22,7 +22,7 @@ app.use("/lectortmo-api/files", otherFilesRoutes);
 mongoose.connect(
   process.env.DB_CONNECTION,
   { useUnifiedTopology: true, useNewUrlParser: true },
-  () => console.log("connected to DB")
+  () => console.log("connected to DB", process.env.DB_CONNECTION)
 );
 // server run
 

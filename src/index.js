@@ -17,7 +17,7 @@ const verify = require("./middlewares/verifyToken");
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 app.use("/lectortmo-api/mangas", verify, mangasRoutes);
 app.use("/lectortmo-api/manhwas", manhwasRoutes);
 app.use("/lectortmo-api/files", otherFilesRoutes);

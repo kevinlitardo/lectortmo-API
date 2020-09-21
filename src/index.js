@@ -6,7 +6,6 @@ require("dotenv").config();
 
 // config
 app.set("port", process.env.PORT || 3000);
-app.use(cors());
 
 // import routes
 const mangasRoutes = require("./routes/mangas.routes");
@@ -18,6 +17,7 @@ const verify = require("./middlewares/verifyToken");
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 app.use("/lectortmo-api/mangas", verify, mangasRoutes);
 app.use("/lectortmo-api/manhwas", manhwasRoutes);
 app.use("/lectortmo-api/files", otherFilesRoutes);

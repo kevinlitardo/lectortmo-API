@@ -24,7 +24,7 @@ router.post("/upload", async (req, res) => {
     status,
     tags,
   } = req.body;
-  const manhwa = new Mangas({
+  const manhwa = new Manhwas({
     title: title,
     description: description,
     imageURL: imageURL,

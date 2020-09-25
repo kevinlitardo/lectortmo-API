@@ -24,7 +24,7 @@ router.post("/upload", async (req, res) => {
     status,
     tags,
   } = req.body;
-  const file = new Mangas({
+  const file = new OtherFiles({
     title: title,
     description: description,
     imageURL: imageURL,

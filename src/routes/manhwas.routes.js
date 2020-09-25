@@ -14,12 +14,22 @@ router.get("/", async (req, res) => {
 
 // submit file
 router.post("/upload", async (req, res) => {
-  const { title, description, imageURL, type, rating, status, tags } = req.body;
-  const manhwa = new Manhwas({
+  const {
+    title,
+    description,
+    imageURL,
+    type,
+    demography,
+    rating,
+    status,
+    tags,
+  } = req.body;
+  const manga = new Mangas({
     title: title,
     description: description,
     imageURL: imageURL,
     type: type,
+    demography: demography,
     rating: rating,
     status: status,
     tags: tags,

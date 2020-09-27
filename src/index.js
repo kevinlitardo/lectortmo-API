@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
-const whitelist = ["http://localhost:3000"];
+const whitelist = ["http://localhost:3000", "http://localhost:3001"];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

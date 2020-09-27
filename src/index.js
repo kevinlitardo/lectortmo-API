@@ -7,7 +7,7 @@ require("dotenv").config();
 const whitelist = ["http://localhost:3000", "http://localhost:3001"];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -28,7 +28,7 @@ const authRoute = require("./routes/auth.routes");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors(corsOptions));
-app.options("*", cors());
+// app.options("*", cors());
 app.use("/lectortmo-api/mangas", mangasRoutes);
 app.use("/lectortmo-api/manhwas", manhwasRoutes);
 app.use("/lectortmo-api/files", otherFilesRoutes);

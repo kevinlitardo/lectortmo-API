@@ -17,6 +17,7 @@ const authRoute = require("./routes/auth.routes");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.options("*", cors());
 app.use("/lectortmo-api/mangas", mangasRoutes);
 app.use("/lectortmo-api/manhwas", manhwasRoutes);
 app.use("/lectortmo-api/files", otherFilesRoutes);

@@ -1,0 +1,57 @@
+GET https://lectortmo-api.herokuapp.com/lectortmo-api/mangas
+
+###
+
+POST http://localhost:3000/lectortmo-api/user/login
+Content-Type: application/json
+
+{
+  "email": "test2@test2.com",
+  "password": "12345678"
+}
+
+###
+
+POST http://localhost:3000/lectortmo-api/user/register
+Content-Type: application/json
+
+{
+  "username": "test",
+  "email": "test@test.com",
+  "password": "12345678"
+}
+
+###
+
+POST http://localhost:3000/lectortmo-api/manhwas/upload/5f6fe48bcc13a524682e6fbd
+Content-Type: application/json
+
+{
+  "title": "New world3",
+  "description": "Se ve weno",
+  "imageURL": "https://otakuteca.com/images/books/cover/5e711702ab21c.jpg",
+  "type": "Manhwa",
+  "demography": "Seinen",
+  "status": "En progreso",
+  "tags": ["Ecchi", "Romance", "Comedia"]
+}
+
+
+###
+
+PATCH   http://localhost:3000/lectortmo-api/manhwas/5f6fe568cc13a524682e6fbf/5f6e874317083f3b43098b8e
+Content-Type: application/json
+
+{
+  "title": "New world-v2",
+  "description": "Se ve weno-v2",
+  "imageURL": "https://otakuteca.com/images/books/cover/5e711702ab21c.jpg",
+  "type": "Manhwa",
+  "demography": "Seinen",
+  "status": "En progreso",
+  "tags": ["Ecchi", "Romance", "Comedia"]
+}
+
+###
+
+DELETE    http://localhost:3000/lectortmo-api/manhwas/5f6fe53bcc13a524682e6fbe/5f6fe48bcc13a524682e6fbd

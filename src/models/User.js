@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const UserSchema = mongoose.Schema(
+const UserSchema = Schema(
   {
     username: {
       type: String,
@@ -20,6 +21,27 @@ const UserSchema = mongoose.Schema(
       max: 100,
       min: 8,
     },
+    userIMG: {
+      type: String,
+    },
+    uploadedMangas: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Mangas",
+      },
+    ],
+    uploadedManhwas: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Manhwas",
+      },
+    ],
+    uploadedFiles: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "OtherFiles",
+      },
+    ],
   },
   { timestamps: true }
 );

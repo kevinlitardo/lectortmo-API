@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const MangasSchema = mongoose.Schema(
+const MangasSchema = Schema(
   {
     title: {
       type: String,
@@ -32,6 +33,10 @@ const MangasSchema = mongoose.Schema(
     tags: {
       type: Array,
       required: true,
+    },
+    uploader: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }

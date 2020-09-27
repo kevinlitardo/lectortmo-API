@@ -21,7 +21,7 @@ router.get("/:userId", async (req, res) => {
 });
 
 // submit file
-router.post("/upload/:userId", async (req, res) => {
+router.post("/upload/:userId", verify, async (req, res) => {
   const {
     title,
     description,

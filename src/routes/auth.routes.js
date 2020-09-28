@@ -40,10 +40,10 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    const { error } = loginValidation(req.body);
-    if (error) res.status(400).send(error.details[0].message);
+  const { error } = loginValidation(req.body);
+  if (error) res.status(400).send(error.details[0].message);
 
+  try {
     const user = await User.findOne({ email: email });
     if (!user) res.status(400).send("The email doesn't exists");
 
@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
     res.send({ message: err });
   }
 
-  // res.send("Logged in!");
+  res.send("Logged in!");
 });
 
 module.exports = router;

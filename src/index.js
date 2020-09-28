@@ -17,10 +17,10 @@ const authRoute = require("./routes/auth.routes");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use("/lectortmo-api/mangas", mangasRoutes);
-app.use("/lectortmo-api/manhwas", manhwasRoutes);
-app.use("/lectortmo-api/files", otherFilesRoutes);
-app.use("/lectortmo-api/user", authRoute);
+app.use("/mangas", mangasRoutes);
+app.use("/manhwas", manhwasRoutes);
+app.use("/files", otherFilesRoutes);
+app.use("/user", authRoute);
 
 // DB connection
 mongoose.connect(

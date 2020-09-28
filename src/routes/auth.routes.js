@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
     res.send({ message: err });
   }
 
-  res.status(200).send("Logged in!").end();
+  res.status(200).send(user.username).end();
 });
 
 module.exports = router;

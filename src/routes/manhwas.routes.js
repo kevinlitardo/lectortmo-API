@@ -14,6 +14,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get specific file
+router.get("/:manhwaId", async (req, res) => {
+  try {
+    const specificManhwa = await Manhwas.findById(req.params.manhwaId);
+    res.json(specificManhwa);
+    console.log(req.params.manhwaId);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 // get specific user uploaded files
 router.get("/:userId", async (req, res) => {
   const user = await User.findById(req.params).populate("manhwas");
@@ -28,7 +39,6 @@ router.post("/upload/:userId", verify, async (req, res) => {
     imageURL,
     type,
     demography,
-    rating,
     status,
     tags,
   } = req.body;
@@ -38,29 +48,17 @@ router.post("/upload/:userId", verify, async (req, res) => {
     imageURL: imageURL,
     type: type,
     demography: demography,
-    rating: rating,
     status: status,
     tags: tags,
   });
 
-  const user = await User.findById(req.params);
+  const user = await User.findById(req.params.userId);
   manhwa.uploader = user;
   user.uploadedManhwas.push(manhwa);
   try {
     const savedManhwa = await manhwa.save();
     await user.save();
     res.json({ savedManhwa });
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
-
-// get specific file
-router.get("/:manhwaId", async (req, res) => {
-  try {
-    const specificManhwa = await Manhwas.findById(req.params.manhwaId);
-    res.json(specificManhwa);
-    console.log(req.params.manhwaId);
   } catch (err) {
     res.json({ message: err });
   }
@@ -103,8 +101,9 @@ router.patch("/:manhwaId/:userId", verify, async (req, res) => {
 
 // delete specific file
 router.delete("/:manhwaId/:userId", verify, async (req, res) => {
-  const user = await User.findById(req.params.userId);
-  user.uploadedManhwas.pull({ _id: req.params.manhwaId });
+  await User.findByIdAndUpdate(req.params.userId, {
+    $pull: { uploadedManhwas: req.params.manhwaId },
+  });
 
   try {
     const removedManhwa = await Manhwas.findByIdAndRemove({

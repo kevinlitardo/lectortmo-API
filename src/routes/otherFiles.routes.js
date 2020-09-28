@@ -14,6 +14,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get specific file
+router.get("/:fileId", async (req, res) => {
+  try {
+    const specificFile = await OtherFiles.findById(req.params.fileId);
+    res.json(specificFile);
+    console.log(req.params.fileId);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 // get specific user uploaded files
 router.get("/:userId", async (req, res) => {
   const user = await User.findById(req.params).populate("files");
@@ -50,17 +61,6 @@ router.post("/upload/:userId", verify, async (req, res) => {
     const savedFiles = await file.save();
     await user.save();
     res.json(savedFiles);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
-
-// get specific file
-router.get("/:fileId", async (req, res) => {
-  try {
-    const specificFile = await OtherFiles.findById(req.params.fileId);
-    res.json(specificFile);
-    console.log(req.params.fileId);
   } catch (err) {
     res.json({ message: err });
   }
@@ -105,8 +105,9 @@ router.patch("/:fileId/:userId", verify, async (req, res) => {
 
 // delete specific file
 router.delete("/:fileId/:userId", verify, async (req, res) => {
-  const user = await User.findById(req.params.userId);
-  user.uploadedFiles.pull({ _id: req.params.fileId });
+  await User.findByIdAndUpdate(req.params.userId, {
+    $pull: { uploadedManhwas: req.params.manhwaId },
+  });
 
   try {
     const removedFile = await OtherFiles.findByIdAndRemove({

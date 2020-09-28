@@ -6,7 +6,7 @@ POST http://localhost:3000/lectortmo-api/user/login
 Content-Type: application/json
 
 {
-  "email": "test2@test2.com",
+  "email": "test@test.com",
   "password": "12345678"
 }
 
@@ -27,7 +27,7 @@ POST http://localhost:3000/lectortmo-api/manhwas/upload/5f6fe48bcc13a524682e6fbd
 Content-Type: application/json
 
 {
-  "title": "New world3",
+  "title": "New world-5",
   "description": "Se ve weno",
   "imageURL": "https://otakuteca.com/images/books/cover/5e711702ab21c.jpg",
   "type": "Manhwa",
@@ -54,4 +54,4 @@ Content-Type: application/json
 
 ###
 
-DELETE    http://localhost:3000/lectortmo-api/manhwas/5f6fe53bcc13a524682e6fbe/5f6fe48bcc13a524682e6fbd
+DELETE    http://localhost:3000/lectortmo-api/manhwas/5f712be78f05214dcfbc399a/5f6fe48bcc13a524682e6fbd

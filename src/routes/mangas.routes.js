@@ -14,6 +14,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get specific file
+router.get("/:mangaId", async (req, res) => {
+  try {
+    const specificManga = await Mangas.findById(req.params.mangaId);
+    res.json(specificManga);
+    console.log(req.params.mangaId);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 // get specific user uploaded files
 router.get("/:userId", async (req, res) => {
   const user = await User.findById(req.params).populate("mangas");
@@ -50,17 +61,6 @@ router.post("/upload/:userId", verify, async (req, res) => {
     const savedMangas = await manga.save();
     await user.save();
     res.json(savedMangas);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
-
-// get specific file
-router.get("/:mangaId", async (req, res) => {
-  try {
-    const specificManga = await Mangas.findById(req.params.mangaId);
-    res.json(specificManga);
-    console.log(req.params.mangaId);
   } catch (err) {
     res.json({ message: err });
   }
@@ -103,8 +103,9 @@ router.patch("/:mangaId/:userId", verify, async (req, res) => {
 
 // delete specific file
 router.delete("/:mangaId/:userId", verify, async (req, res) => {
-  const user = await User.findById(req.params.userId);
-  user.uploadedMangas.pull({ _id: req.params.mangaId });
+  await User.findByIdAndUpdate(req.params.userId, {
+    $pull: { uploadedMangas: req.params.manhwaId },
+  });
 
   try {
     const removedManga = await Mangas.findByIdAndRemove({

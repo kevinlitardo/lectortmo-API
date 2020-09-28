@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
     res.send({ message: err });
   }
 
-  // res.send("Logged in!");
+  res.send("Logged in!");
 });
 
 module.exports = router;

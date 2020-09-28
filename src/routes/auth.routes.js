@@ -43,14 +43,14 @@ router.post("/login", async (req, res) => {
   const { error } = loginValidation(req.body);
   if (error) res.status(400).send(error.details[0].message);
 
+  const user = await User.findOne({ email: email });
+  if (!user) res.status(400).send("The email doesn't exists");
+
+  // check if password match
+  const validPassword = await bcrypt.compare(password, user.password);
+  if (!validPassword) res.status(400).send("Invalid password");
+
   try {
-    const user = await User.findOne({ email: email });
-    if (!user) res.status(400).send("The email doesn't exists");
-
-    // check if password match
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) res.status(400).send("Invalid password");
-
     // create and assign token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res.header("auth-token", token).send(token);

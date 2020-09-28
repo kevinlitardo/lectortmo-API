@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 // config
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 4000);
 
 // import routes
 const mangasRoutes = require("./routes/mangas.routes");
@@ -17,6 +18,7 @@ const authRoute = require("./routes/auth.routes");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 app.use("/mangas", mangasRoutes);
 app.use("/manhwas", manhwasRoutes);
 app.use("/files", otherFilesRoutes);

@@ -1,8 +1,13 @@
-GET https://lectortmo-api.herokuapp.com/lectortmo-api/mangas
+GET https://lectortmo-api.herokuapp.com/manhwas
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
+
+###
+GET http://localhost:4000/manhwas
+# Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
 
 ###
 
-POST http://localhost:3000/lectortmo-api/user/login
+POST http://localhost:4000/user/login
 Content-Type: application/json
 
 {
@@ -12,7 +17,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/lectortmo-api/user/register
+POST http://localhost:3000/user/register
 Content-Type: application/json
 
 {
@@ -23,8 +28,9 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/lectortmo-api/manhwas/upload/5f6fe48bcc13a524682e6fbd
+POST http://localhost:4000/manhwas/upload/5f715172476e716557b2f644
 Content-Type: application/json
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
 
 {
   "title": "New world-5",
@@ -39,7 +45,7 @@ Content-Type: application/json
 
 ###
 
-PATCH   http://localhost:3000/lectortmo-api/manhwas/5f6fe568cc13a524682e6fbf/5f6e874317083f3b43098b8e
+PATCH   http://localhost:3000/manhwas/5f6fe568cc13a524682e6fbf/5f6e874317083f3b43098b8e
 Content-Type: application/json
 
 {
@@ -54,4 +60,4 @@ Content-Type: application/json
 
 ###
 
-DELETE    http://localhost:3000/lectortmo-api/manhwas/5f712be78f05214dcfbc399a/5f6fe48bcc13a524682e6fbd
+DELETE    http://localhost:3000/manhwas/5f712be78f05214dcfbc399a/5f6fe48bcc13a524682e6fbd

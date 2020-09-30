@@ -3,7 +3,7 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3
 
 ###
 GET http://localhost:4000/manhwas
-# Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
+# Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMjMyNDZ9.NyyUODwCeIMEY1xrmVXvRZbF3FEs7exhIv8JVzlkOwc; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 20:00:50 GMT; HttpOnly; Secure
 
 ###
 
@@ -17,11 +17,11 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/user/register
+POST http://localhost:4000/user/register
 Content-Type: application/json
 
 {
-  "username": "test",
+  "username": "ricqrdo",
   "email": "test@test.com",
   "password": "12345678"
 }

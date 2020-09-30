@@ -12,13 +12,13 @@ router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send("Los datos no cumplen los requisitos");
 
   // check if user email or name exists
-  const emailExists = await User.findOne({ email: email });
-  if (emailExists) return res.status(400).send("Email already exists");
   const userExists = await User.findOne({ username: username });
   if (userExists) return res.status(400).send("Username already exists");
+  const emailExists = await User.findOne({ email: email });
+  if (emailExists) return res.status(400).send("Email already exists");
 
   // hash password
   const salt = await bcrypt.genSalt(10);
@@ -33,7 +33,7 @@ router.post("/register", async (req, res) => {
     const savedUser = await user.save();
     res.send(savedUser);
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send("error prro");
   }
 });
 
@@ -54,15 +54,15 @@ router.post("/login", async (req, res) => {
     // create and assign token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res.cookie("auth_token", token, {
-      maxAge: 3600,
       httpOnly: true,
-      secure: true,
+      maxAge: 3600,
+      // secure: true,
     });
   } catch (error) {
     res.send({ message: err });
   }
 
-  res.status(200).send(user.username).end();
+  res.status(200).send([user.username, user._id]).end();
 });
 
 module.exports = router;

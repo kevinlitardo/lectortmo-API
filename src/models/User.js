@@ -23,6 +23,7 @@ const UserSchema = Schema(
     },
     userIMG: {
       type: String,
+      default: "",
     },
     uploadedMangas: [
       {

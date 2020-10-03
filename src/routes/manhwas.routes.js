@@ -15,11 +15,12 @@ router.get("/", async (req, res) => {
 });
 
 // get specific file
-router.get("/:manhwaId", async (req, res) => {
+router.get("/:title", async (req, res) => {
+  const title = req.params.title.replace("-", " ");
   try {
-    const specificManhwa = await Manhwas.findById(req.params.manhwaId);
+    const specificManhwa = await Manhwas.findOne({ title: title });
     res.json(specificManhwa);
-    console.log(req.params.manhwaId);
+    console.log(req.params.title);
   } catch (err) {
     res.json({ message: err });
   }

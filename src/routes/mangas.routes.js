@@ -15,9 +15,10 @@ router.get("/", async (req, res) => {
 });
 
 // get specific file
-router.get("/:mangaId", async (req, res) => {
+router.get("/:title", async (req, res) => {
+  const title = req.params.title.replace("-", " ");
   try {
-    const specificManga = await Mangas.findById(req.params.mangaId);
+    const specificManga = await Mangas.findOne({ title: title });
     res.json(specificManga);
     console.log(req.params.mangaId);
   } catch (err) {

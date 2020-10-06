@@ -15,9 +15,10 @@ router.get("/", async (req, res) => {
 });
 
 // get specific file
-router.get("/:fileId", async (req, res) => {
+router.get("/:title", async (req, res) => {
+  const title = req.params.title.replace("-", " ");
   try {
-    const specificFile = await OtherFiles.findById(req.params.fileId);
+    const specificFile = await OtherFiles.findOne({ title: title });
     res.json(specificFile);
     console.log(req.params.fileId);
   } catch (err) {

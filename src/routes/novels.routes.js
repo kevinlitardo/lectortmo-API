@@ -1,38 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const OtherFiles = require("../models/OtherFiles");
+const Novels = require("../models/Novels");
 const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 
 // get all
 router.get("/", async (req, res) => {
   try {
-    const files = await OtherFiles.find();
-    res.json(files);
+    const novels = await Novels.find();
+    res.json(novels);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-// get specific file
+// get specific novel
 router.get("/:title", async (req, res) => {
   const title = req.params.title.replace("-", " ");
   try {
-    const specificFile = await OtherFiles.findOne({ title: title });
-    res.json(specificFile);
-    console.log(req.params.fileId);
+    const specificNovel = await Novels.findOne({ title: title });
+    res.json(specificNovel);
+    console.log(req.params.title);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-// get specific user uploaded files
+// get specific user uploaded novels
 router.get("/:userId", async (req, res) => {
-  const user = await User.findById(req.params).populate("files");
+  const user = await User.findById(req.params).populate("novels");
   res.json({ user });
 });
 
-// submit file
+// submit novel
 router.post("/upload/:userId", verify, async (req, res) => {
   const {
     title,
@@ -44,7 +44,7 @@ router.post("/upload/:userId", verify, async (req, res) => {
     status,
     tags,
   } = req.body;
-  const file = new OtherFiles({
+  const novel = new Novels({
     title: title,
     description: description,
     imageURL: imageURL,
@@ -56,18 +56,18 @@ router.post("/upload/:userId", verify, async (req, res) => {
   });
 
   const user = await User.findById(req.params);
-  file.uploader = user;
-  user.uploadedFiles.push(manhwa);
+  novels.uploader = user;
+  user.uploadedNovels.push(novel);
   try {
-    const savedFiles = await file.save();
+    const savedNovel = await novel.save();
     await user.save();
-    res.json(savedFiles);
+    res.json(savedNovel);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-// edit specific file
+// edit specific novel
 router.patch("/:fileId/:userId", verify, async (req, res) => {
   const {
     title,
@@ -80,7 +80,7 @@ router.patch("/:fileId/:userId", verify, async (req, res) => {
   } = req.body;
 
   try {
-    const updatedFile = await OtherFiles.updateOne(
+    const updatedNovel = await Novels.updateOne(
       {
         _id: req.params.fileId,
       },
@@ -97,24 +97,24 @@ router.patch("/:fileId/:userId", verify, async (req, res) => {
         },
       }
     );
-    res.json(updatedFile);
+    res.json(updatedNovel);
     console.log(req.params.fileId);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-// delete specific file
+// delete specific novel
 router.delete("/:fileId/:userId", verify, async (req, res) => {
   await User.findByIdAndUpdate(req.params.userId, {
-    $pull: { uploadedManhwas: req.params.manhwaId },
+    $pull: { uploadedNovels: req.params.manhwaId },
   });
 
   try {
-    const removedFile = await OtherFiles.findByIdAndRemove({
+    const removedNovel = await Novels.findByIdAndRemove({
       _id: req.params.fileId,
     });
-    res.json(removedFile);
+    res.json(removedNovel);
   } catch (err) {
     res.json({ message: err });
   }

@@ -11,7 +11,7 @@ app.set("port", process.env.PORT || 4000);
 // import routes
 const mangasRoutes = require("./routes/mangas.routes");
 const manhwasRoutes = require("./routes/manhwas.routes");
-const otherFilesRoutes = require("./routes/otherFiles.routes");
+const novelsRoutes = require("./routes/novels.routes");
 const authRoute = require("./routes/auth.routes");
 
 // middlewares
@@ -21,7 +21,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use("/mangas", mangasRoutes);
 app.use("/manhwas", manhwasRoutes);
-app.use("/files", otherFilesRoutes);
+app.use("/novels", novelsRoutes);
 app.use("/user", authRoute);
 
 // DB connection

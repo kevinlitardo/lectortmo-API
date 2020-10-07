@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const OtherFilesSchema = Schema(
+const NovelsSchema = Schema(
   {
     title: {
       type: String,
@@ -42,4 +42,4 @@ const OtherFilesSchema = Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("File", OtherFilesSchema);
+module.exports = mongoose.model("Novel", NovelsSchema);

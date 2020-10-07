@@ -37,10 +37,10 @@ const UserSchema = Schema(
         ref: "Manhwas",
       },
     ],
-    uploadedFiles: [
+    uploadedNovels: [
       {
         type: Schema.Types.ObjectId,
-        ref: "OtherFiles",
+        ref: "Novels",
       },
     ],
   },

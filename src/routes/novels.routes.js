@@ -5,7 +5,7 @@ const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 
 // get all
-router.get("/", async (req, res) => {
+router.get("/", async (_, res) => {
   try {
     const novels = await Novels.find();
     res.json(novels);
@@ -27,11 +27,10 @@ router.get("/:title", async (req, res) => {
 });
 
 // get specific user uploaded novels
-router.get("/:userId", async (req, res) => {
-  const user = await User.findById(req.params).populate("novels");
-  res.json({ user });
+router.get("/user/:userId", async (req, res) => {
+  const novels = await Novels.find({uploader: req.params.userId})
+  res.json( novels );
 });
-
 // submit novel
 router.post("/upload/:userId", verify, async (req, res) => {
   const {
@@ -55,8 +54,8 @@ router.post("/upload/:userId", verify, async (req, res) => {
     tags: tags,
   });
 
-  const user = await User.findById(req.params);
-  novels.uploader = user;
+  const user = await User.findById(req.params.userId);
+  novel.uploader = user;
   user.uploadedNovels.push(novel);
   try {
     const savedNovel = await novel.save();
@@ -91,28 +90,26 @@ router.patch("/:fileId/:userId", verify, async (req, res) => {
           imageURL: imageURL,
           type: type,
           demography: demography,
-          rating: rating,
           status: status,
           tags: tags,
         },
       }
     );
     res.json(updatedNovel);
-    console.log(req.params.fileId);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
 // delete specific novel
-router.delete("/:fileId/:userId", verify, async (req, res) => {
+router.delete("/:novelId/:userId", verify, async (req, res) => {
   await User.findByIdAndUpdate(req.params.userId, {
-    $pull: { uploadedNovels: req.params.manhwaId },
+    $pull: { uploadedNovels: req.params.novelId },
   });
 
   try {
     const removedNovel = await Novels.findByIdAndRemove({
-      _id: req.params.fileId,
+      _id: req.params.novelId,
     });
     res.json(removedNovel);
   } catch (err) {

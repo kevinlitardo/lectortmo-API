@@ -5,7 +5,7 @@ const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 
 // get all
-router.get("/", async (req, res) => {
+router.get("/", async (_, res) => {
   try {
     const mangas = await Mangas.find();
     res.json(mangas);
@@ -27,9 +27,9 @@ router.get("/:title", async (req, res) => {
 });
 
 // get specific user uploaded files
-router.get("/:userId", async (req, res) => {
-  const user = await User.findById(req.params).populate("mangas");
-  res.json({ user });
+router.get("/user/:userId", async (req, res) => {
+  const mangas = await Mangas.find({uploader: req.params.userId})
+  res.json( mangas );
 });
 
 // submit file
@@ -55,7 +55,7 @@ router.post("/upload/:userId", verify, async (req, res) => {
     tags: tags,
   });
 
-  const user = await User.findById(req.params);
+  const user = await User.findById(req.params.userId);
   manga.uploader = user;
   user.uploadedMangas.push(manga);
   try {
@@ -90,7 +90,6 @@ router.patch("/:mangaId/:userId", verify, async (req, res) => {
           imageURL: imageURL,
           type: type,
           demography: demography,
-          rating: rating,
           status: status,
           tags: tags,
         },
@@ -105,7 +104,7 @@ router.patch("/:mangaId/:userId", verify, async (req, res) => {
 // delete specific file
 router.delete("/:mangaId/:userId", verify, async (req, res) => {
   await User.findByIdAndUpdate(req.params.userId, {
-    $pull: { uploadedMangas: req.params.manhwaId },
+    $pull: { uploadedMangas: req.params.mangaId },
   });
 
   try {

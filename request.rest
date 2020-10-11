@@ -2,17 +2,21 @@ GET https://lectortmo-api.herokuapp.com/manhwas
 Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
 
 ###
-GET http://localhost:4000/manhwas/Sister-Neighbors
+GET http://localhost:4000/manhwas/user/5f7d0fee21f7750017ff3708
 # Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMjMyNDZ9.NyyUODwCeIMEY1xrmVXvRZbF3FEs7exhIv8JVzlkOwc; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 20:00:50 GMT; HttpOnly; Secure
 
+###
+GET http://localhost:4000/manhwas/Sister Neighbors
+# Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMjMyNDZ9.NyyUODwCeIMEY1xrmVXvRZbF3FEs7exhIv8JVzlkOwc; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 20:00:50 GMT; HttpOnly; Secure
+5f651c9630328119891ac0c5
 ###
 
 POST http://localhost:4000/user/login
 Content-Type: application/json
 
 {
-  "email": "test@test.com",
-  "password": "12345678"
+  "email": "ricqrdo@ricqrdo.com",
+  "password": "trestres"
 }
 
 ###
@@ -28,12 +32,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:4000/manhwas/upload/5f715172476e716557b2f644
+POST http://localhost:4000/manhwas/upload/5f7d0fee21f7750017ff3708
 Content-Type: application/json
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDIzNzc4ODJ9.uKRj3Vb_niJt7fXB9C1wsf8fB3x14WQ_KDf79DOcEEA; Max-Age=3; Path=/; Expires=Sun, 11 Oct 2020 00:58:05 GMT; HttpOnly
 
 {
-  "title": "New world-5",
+  "title": "prueba3",
   "description": "Se ve weno",
   "imageURL": "https://otakuteca.com/images/books/cover/5e711702ab21c.jpg",
   "type": "Manhwa",
@@ -45,12 +49,13 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3
 
 ###
 
-PATCH   http://localhost:3000/manhwas/5f6fe568cc13a524682e6fbf/5f6e874317083f3b43098b8e
+PATCH http://localhost:4000/novels/5f825b595b151018228515b7/5f7d0fee21f7750017ff3708
 Content-Type: application/json
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDIzNzc4ODJ9.uKRj3Vb_niJt7fXB9C1wsf8fB3x14WQ_KDf79DOcEEA; Max-Age=3; Path=/; Expires=Sun, 11 Oct 2020 00:58:05 GMT; HttpOnly
 
 {
-  "title": "New world-v2",
-  "description": "Se ve weno-v2",
+  "title": "prueba editada xd",
+  "description": "se ve editado xd",
   "imageURL": "https://otakuteca.com/images/books/cover/5e711702ab21c.jpg",
   "type": "Manhwa",
   "demography": "Seinen",
@@ -60,4 +65,5 @@ Content-Type: application/json
 
 ###
 
-DELETE    http://localhost:3000/manhwas/5f712be78f05214dcfbc399a/5f6fe48bcc13a524682e6fbd
+DELETE    http://localhost:4000/mangas/5f825aaf73678f179f3ae761/5f7d0fee21f7750017ff3708
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDIzNzc4ODJ9.uKRj3Vb_niJt7fXB9C1wsf8fB3x14WQ_KDf79DOcEEA; Max-Age=3; Path=/; Expires=Sun, 11 Oct 2020 00:58:05 GMT; HttpOnly

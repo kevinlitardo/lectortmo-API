@@ -5,7 +5,7 @@ const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 
 // get all
-router.get("/", async (req, res) => {
+router.get("/", async (_, res) => {
   try {
     const manhwas = await Manhwas.find();
     res.json(manhwas);
@@ -26,10 +26,10 @@ router.get("/:title", async (req, res) => {
   }
 });
 
-// get specific user uploaded files
-router.get("/:userId", async (req, res) => {
-  const user = await User.findById(req.params).populate("manhwas");
-  res.json({ user });
+// get specific user uploaded manhwas
+router.get("/user/:userId", async (req, res) => {
+  const manhwas = await Manhwas.find({uploader: req.params.userId})
+  res.json( manhwas );
 });
 
 // submit file
@@ -88,7 +88,6 @@ router.patch("/:manhwaId/:userId", verify, async (req, res) => {
           imageURL: imageURL,
           type: type,
           demography: demography,
-          rating: rating,
           status: status,
           tags: tags,
         },

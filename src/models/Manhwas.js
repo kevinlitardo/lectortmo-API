@@ -30,6 +30,9 @@ const ManhwasSchema = Schema(
       type: String,
       required: true,
     },
+    chapters: {
+      type: Array,
+    },
     tags: {
       type: Array,
       required: true,

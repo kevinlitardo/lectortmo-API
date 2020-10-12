@@ -33,7 +33,7 @@ router.post("/register", async (req, res) => {
     const savedUser = await user.save();
     res.send(savedUser);
   } catch (err) {
-    res.status(400).send("error prro");
+    res.status(400).send("error at register");
   }
 });
 

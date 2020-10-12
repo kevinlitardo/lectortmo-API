@@ -67,30 +67,13 @@ router.post("/upload/:userId", verify, async (req, res) => {
 
 // edit specific file
 router.patch("/:manhwaId/:userId", verify, async (req, res) => {
-  const {
-    title,
-    description,
-    imageURL,
-    type,
-    demography,
-    status,
-    tags,
-  } = req.body;
   try {
     const updatedManhwa = await Manhwas.updateOne(
       {
         _id: req.params.manhwaId,
       },
       {
-        $set: {
-          title: title,
-          description: description,
-          imageURL: imageURL,
-          type: type,
-          demography: demography,
-          status: status,
-          tags: tags,
-        },
+        $set: req.body
       }
     );
     res.json(updatedManhwa);

@@ -65,4 +65,15 @@ router.post("/login", async (req, res) => {
   res.status(200).send([user.username, user._id]).end();
 });
 
+// upload image route 
+router.patch('/update', async (req, res) => {
+  res.send('editado')
+  console.log(req.body)
+
+  // const newImage = new Image({
+  //   fileName: Image,
+  //   urlFile: `http://localhost:4000/${file.filename}`
+  // })
+})
+
 module.exports = router;

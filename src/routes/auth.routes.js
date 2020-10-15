@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Users = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {cloudinary} = require('../utils/cloudinary')
 const {
   registerValidation,
   loginValidation,
@@ -62,18 +63,73 @@ router.post("/login", async (req, res) => {
     res.send({ message: err });
   }
 
-  res.status(200).send([user.username, user._id]).end();
+  res.status(200).send([user.username, user._id, user.userIMG]).end();
 });
 
-// upload image route 
+// update user
 router.patch('/update', async (req, res) => {
-  res.send('editado')
-  console.log(req.body)
+  let updateValues = {}
+  if (req.body.new_password !== '') {
+    updateValues = {
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.new_password
+    }
+  } else {
+    updateValues = {
+      username: req.body.username,
+      email: req.body.email,
+    }
+  }
 
-  // const newImage = new Image({
-  //   fileName: Image,
-  //   urlFile: `http://localhost:4000/${file.filename}`
-  // })
+  try {
+    const updatedUser = await User.updateOne(
+      {_id: req.body.id},{
+        $set: updateValues
+      }
+    )
+    console.log(updatedUser)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send('Something went wrong')
+  }
+
+  try {
+    // create and assign token
+    const token = jwt.sign({ _id: req.body.id}, process.env.TOKEN_SECRET);
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      maxAge: 3600,
+      // secure: true,
+    });
+    res.status(200).send([user.username, user._id, user.userIMG]).end();
+  } catch (err) {
+    res.send({ message: err });
+  }
+
+})
+
+// upload image route 
+router.patch('/updateImage', async (req, res) => {
+  try {
+    const fileStr = req.body.data
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: 'lectortmo'
+    })
+
+    const updatedUserImage = await User.updateOne(
+      {_id: req.body.id},{
+        $set: {
+          userIMG: uploadedResponse.secure_url
+        }
+      }
+    )
+    console.log(updatedUserImage)
+    res.send('Uploaded!')
+  } catch (error) {
+    console.log(error)
+    res.status(500).send('Something went wrong')
+  }
 })
 
 module.exports = router;

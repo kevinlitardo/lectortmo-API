@@ -76,6 +76,10 @@ router.patch('/update', async (req, res) => {
   }
   if(new_email !== '') updateValues.email = new_email
   if(username !== '') updateValues.username = username
+    const usernameExists = await User.findOne({ username: username });
+    if (usernameExists) return res.status(400).send("Username already exists");
+    const emailExists = await User.findOne({ email: new_email });
+    if (emailExists) return res.status(400).send("Email already exists");
   if(image !== '') {
     try {
       const fileStr = req.body.image
@@ -102,10 +106,10 @@ router.patch('/update', async (req, res) => {
           $set: updateValues
         }
       )
-      res.send('Updated!')
+      res.status(200).send('Updated!').end()
     } catch (error) {
       console.log(error)
-      res.status(500).send('Something went wrong')
+      res.status(500).send('Something went wrong').end()
     }
   }
 })

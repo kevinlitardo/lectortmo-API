@@ -3,7 +3,7 @@ const User = require("../models/User");
 const Users = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {cloudinary} = require('../utils/cloudinary')
+const { cloudinary } = require('../utils/cloudinary')
 const {
   registerValidation,
   loginValidation,
@@ -59,77 +59,74 @@ router.post("/login", async (req, res) => {
       maxAge: 3600,
       // secure: true,
     });
+    res.status(200).send({username: user.username, id: user._id, userIMG: user.userIMG});
   } catch (error) {
-    res.send({ message: err });
+    res.send({ message: error });
   }
-
-  res.status(200).send([user.username, user._id, user.userIMG]).end();
 });
 
 // update user
 router.patch('/update', async (req, res) => {
+  const {username, new_password, new_email, image} = req.body
   let updateValues = {}
-  if (req.body.new_password !== '') {
-    updateValues = {
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.new_password
+  if(new_password !== '') {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(new_password, salt);
+    updateValues={...updateValues, password: hashedPassword}
+  }
+  if(new_email !== '') updateValues={...updateValues, email: new_email}
+  if(username !== '') updateValues={...updateValues, username: username}
+  if(image !== '') {
+    try {
+      const fileStr = req.body.image
+      const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+        upload_preset: 'lectortmo'
+      })
+      await User.updateOne(
+        {_id: req.body.id},{
+          $set: {
+            userIMG: uploadedResponse.secure_url
+          }
+        }
+      )
+      res.send('Uploaded!')
+    } catch (error) {
+      res.status(500).send(error)
     }
-  } else {
-    updateValues = {
-      username: req.body.username,
-      email: req.body.email,
-    }
   }
 
-  try {
-    const updatedUser = await User.updateOne(
-      {_id: req.body.id},{
-        $set: updateValues
-      }
-    )
-    console.log(updatedUser)
-  } catch (error) {
-    console.log(error)
-    res.status(500).send('Something went wrong')
-  }
-
-  try {
-    // create and assign token
-    const token = jwt.sign({ _id: req.body.id}, process.env.TOKEN_SECRET);
-    res.cookie("auth_token", token, {
-      httpOnly: true,
-      maxAge: 3600,
-      // secure: true,
-    });
-    res.status(200).send([user.username, user._id, user.userIMG]).end();
-  } catch (err) {
-    res.send({ message: err });
-  }
-
+//   if (Object.keys(updateValues).length > 0) {
+//     try {
+//       await User.updateOne(
+//         { _id: req.body.id }, {
+//           $set: updateValues
+//        }
+//     )
+//   } catch (error) {
+//     console.log(error)
+//     res.status(500).send('Something went wrong')
+//   }
+// }
 })
 
 // upload image route 
-router.patch('/updateImage', async (req, res) => {
-  try {
-    const fileStr = req.body.data
-    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-      upload_preset: 'lectortmo'
-    })
-
-    const updatedUserImage = await User.updateOne(
-      {_id: req.body.id},{
-        $set: {
-          userIMG: uploadedResponse.secure_url
-        }
-      }
-    )
-    console.log(updatedUserImage)
-    res.send('Uploaded!')
-  } catch (error) {
-    console.log(error)
-    res.status(500).send('Something went wrong')
-  }
-})
+// router.patch('/updateImage', async (req, res) => {
+//   try {
+//     const fileStr = req.body.image
+//     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+//       upload_preset: 'lectortmo'
+//     })
+//     await User.updateOne(
+//       {_id: req.body.id},{
+//         $set: {
+//           userIMG: uploadedResponse.secure_url
+//         }
+//       }
+//     )
+//     res.send('Uploaded!')
+//   } catch (error) {
+//     res.status(500).send(error)
+//   }
+// })
 
 module.exports = router;

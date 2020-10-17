@@ -72,10 +72,10 @@ router.patch('/update', async (req, res) => {
   if(new_password !== '') {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(new_password, salt);
-    updateValues={...updateValues, password: hashedPassword}
+    updateValues.password = hashedPassword
   }
-  if(new_email !== '') updateValues={...updateValues, email: new_email}
-  if(username !== '') updateValues={...updateValues, username: username}
+  if(new_email !== '') updateValues.email = new_email
+  if(username !== '') updateValues.username = username
   if(image !== '') {
     try {
       const fileStr = req.body.image
@@ -95,38 +95,19 @@ router.patch('/update', async (req, res) => {
     }
   }
 
-//   if (Object.keys(updateValues).length > 0) {
-//     try {
-//       await User.updateOne(
-//         { _id: req.body.id }, {
-//           $set: updateValues
-//        }
-//     )
-//   } catch (error) {
-//     console.log(error)
-//     res.status(500).send('Something went wrong')
-//   }
-// }
+  if (Object.keys(updateValues).length > 0) {
+    try {
+      await User.updateOne(
+        { _id: req.body.id }, {
+          $set: updateValues
+        }
+      )
+      res.send('Updated!')
+    } catch (error) {
+      console.log(error)
+      res.status(500).send('Something went wrong')
+    }
+  }
 })
-
-// upload image route 
-// router.patch('/updateImage', async (req, res) => {
-//   try {
-//     const fileStr = req.body.image
-//     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-//       upload_preset: 'lectortmo'
-//     })
-//     await User.updateOne(
-//       {_id: req.body.id},{
-//         $set: {
-//           userIMG: uploadedResponse.secure_url
-//         }
-//       }
-//     )
-//     res.send('Uploaded!')
-//   } catch (error) {
-//     res.status(500).send(error)
-//   }
-// })
 
 module.exports = router;

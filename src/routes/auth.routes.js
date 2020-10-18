@@ -114,4 +114,9 @@ router.patch('/update', async (req, res) => {
   }
 })
 
+//logout 
+router.get('/logout', (_req, res)=>{
+  res.cookie("auth_token", '', {maxAge: 1}).end()
+})
+
 module.exports = router;

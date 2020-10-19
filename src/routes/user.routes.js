@@ -114,6 +114,28 @@ router.patch('/update', async (req, res) => {
   }
 })
 
+// add file to user lists
+router.patch('/lists', async (req, res)=> {
+  const {fileId, list, userId, } = req.body
+
+  const user = await User.findById(userId);
+  let lists = Object.values(user.lists).slice(1)
+  console.log(lists)  
+
+  for (let i = 0; i < 6; i++) {
+    console.log(lists[i].map(id => id !== fileId))
+  }
+
+
+  // try {
+  //   user.lists[list].push(fileId);
+  //   await user.save();
+  //   res.send('Updated!')
+  // } catch (error) {
+  //   res.status(500).send(error)
+  // }
+})
+
 //logout 
 router.get('/logout', (_req, res)=>{
   res.cookie("auth_token", '', {maxAge: 1}).end()

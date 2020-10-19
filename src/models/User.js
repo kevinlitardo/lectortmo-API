@@ -25,24 +25,46 @@ const UserSchema = Schema(
       type: String,
       default: "",
     },
-    uploadedMangas: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Mangas",
-      },
-    ],
-    uploadedManhwas: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Manhwas",
-      },
-    ],
-    uploadedNovels: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Novels",
-      },
-    ],
+    uploads: {
+      mangas: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Mangas",
+        },
+      ],
+      manhwas: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Manhwas",
+        },
+      ],
+      novels: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Novels",
+        },
+      ],
+    },
+    lists: {
+      read: [
+        {type: Schema.Types.ObjectId}
+      ],
+      pending: [
+        {type: Schema.Types.ObjectId}
+      ],
+      following: [
+        {type: Schema.Types.ObjectId}
+      ],
+      favorite: [
+        {type: Schema.Types.ObjectId}
+      ],
+      obtained: [
+        {type: Schema.Types.ObjectId}
+      ],
+      abandoned: [
+        {type: Schema.Types.ObjectId}
+      ]
+    }
   },
   { timestamps: true }
 );

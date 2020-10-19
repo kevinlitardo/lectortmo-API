@@ -56,7 +56,7 @@ router.post("/upload/:userId", verify, async (req, res) => {
 
   const user = await User.findById(req.params.userId);
   novel.uploader = user;
-  user.uploadedNovels.push(novel);
+  user.uploads.novels.push(novel);
   try {
     const savedNovel = await novel.save();
     await user.save();

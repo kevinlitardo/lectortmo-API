@@ -57,7 +57,7 @@ router.post("/upload/:userId", verify, async (req, res) => {
 
   const user = await User.findById(req.params.userId);
   manga.uploader = user;
-  user.uploadedMangas.push(manga);
+  user.uploads.mangas.push(manga);
   try {
     const savedMangas = await manga.save();
     await user.save();

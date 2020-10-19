@@ -61,3 +61,14 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIx
 
 DELETE    http://localhost:4000/mangas/5f825aaf73678f179f3ae761/5f7d0fee21f7750017ff3708
 Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDIzNzc4ODJ9.uKRj3Vb_niJt7fXB9C1wsf8fB3x14WQ_KDf79DOcEEA; Max-Age=3; Path=/; Expires=Sun, 11 Oct 2020 00:58:05 GMT; HttpOnly
+
+###
+
+PATCH  http://localhost:4000/user/lists
+Content-Type: application/json
+
+{
+  "list": "favorite",
+  "userId": "5f8ce61bf386103500a5ccd7",
+  "fileId": "5f651c9630328119891ac0c5"
+}

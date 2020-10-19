@@ -12,7 +12,7 @@ app.set("port", process.env.PORT || 4000);
 const mangasRoutes = require("./routes/mangas.routes");
 const manhwasRoutes = require("./routes/manhwas.routes");
 const novelsRoutes = require("./routes/novels.routes");
-const authRoute = require("./routes/auth.routes");
+const authRoute = require("./routes/user.routes");
 
 // middlewares
 app.use(express.urlencoded({limit: '50mb', extended: true }));

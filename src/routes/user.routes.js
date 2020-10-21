@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
       maxAge: 3600,
       // secure: true,
     });
-    res.status(200).send({username: user.username, id: user._id, userIMG: user.userIMG});
+    res.status(200).send({username: user.username, id: user._id, userIMG: user.userIMG, lists: user.lists});
   } catch (error) {
     res.send({ message: error });
   }
@@ -116,24 +116,21 @@ router.patch('/update', async (req, res) => {
 
 // add file to user lists
 router.patch('/lists', async (req, res)=> {
-  const {fileId, list, userId, } = req.body
+  const {fileId, list, userId, prevList} = req.body
 
   const user = await User.findById(userId);
-  let lists = Object.values(user.lists).slice(1)
-  console.log(lists)  
-
-  for (let i = 0; i < 6; i++) {
-    console.log(lists[i].map(id => id !== fileId))
+  if(prevList != null){
+    user.lists[prevList] = user.lists[prevList].filter((id) => id != fileId)
+    await user.save()
   }
 
-
-  // try {
-  //   user.lists[list].push(fileId);
-  //   await user.save();
-  //   res.send('Updated!')
-  // } catch (error) {
-  //   res.status(500).send(error)
-  // }
+  try {
+    user.lists[list].push(fileId);
+    await user.save();
+    res.json(user.lists)
+  } catch (error) {
+    res.status(500).send(error)
+  }
 })
 
 //logout 

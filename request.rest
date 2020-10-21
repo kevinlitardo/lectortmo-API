@@ -70,5 +70,6 @@ Content-Type: application/json
 {
   "list": "favorite",
   "userId": "5f8ce61bf386103500a5ccd7",
-  "fileId": "5f651c9630328119891ac0c5"
+  "fileId": "5f651c9630328119891ac0c5",
+  "prevList": "following"
 }

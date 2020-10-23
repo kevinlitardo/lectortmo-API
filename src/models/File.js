@@ -45,8 +45,4 @@ const FileSchema = Schema(
   { timestamps: true }
 );
 
-module.exports = {
-  Manhwas: mongoose.model("Manhwa", FileSchema),
-  Mangas: mongoose.model("Manga", FileSchema),
-  Novels: mongoose.model("Novel", FileSchema)
-}
+module.exports = mongoose.model("File", FileSchema)

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {Manhwas} = require("../models/File");
+const Manhwas = require("../models/File");
 const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 

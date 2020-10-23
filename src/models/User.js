@@ -52,7 +52,7 @@ const UserSchema = Schema({
         {type: Schema.Types.ObjectId, ref: "File"}
       ],
       following: [
-        {type: Schema.Types.ObjectId, ref: "File"}
+        {type: Schema.Types.ObjectId, ref: 'File'}
       ],
       favorite: [
         {type: Schema.Types.ObjectId, ref: "File"}

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Novels = require("../models/Novels");
+const {Novels} = require("../models/File");
 const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 

@@ -25,20 +25,20 @@ POST http://localhost:4000/user/register
 Content-Type: application/json
 
 {
-  "username": "ricqrdo",
+  "username": "test",
   "email": "test@test.com",
   "password": "12345678"
 }
 
 ###
 
-POST http://localhost:4000/manhwas/upload/5f7d0fee21f7750017ff3708
+POST http://localhost:4000/novels/upload/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDIzNzc4ODJ9.uKRj3Vb_niJt7fXB9C1wsf8fB3x14WQ_KDf79DOcEEA; Max-Age=3; Path=/; Expires=Sun, 11 Oct 2020 00:58:05 GMT; HttpOnly
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM0MjEyODd9.V7WFpeqO4b8UxXO7x0_G4yBu6Bbj6HBqDjDJdYq4er8; Max-Age=3; Path=/; Expires=Fri, 23 Oct 2020 02:48:10 GMT; HttpOnly
 
 {
-  "title": "prueba-chapters",
-  "description": "Se ve weno",
+  "title": "prueba-file-schema",
+  "description": "prueba novel",
   "imageURL": "https://otakuteca.com/images/books/cover/5e711702ab21c.jpg",
   "type": "Manhwa",
   "demography": "Seinen",
@@ -59,7 +59,7 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIx
 
 ###
 
-DELETE    http://localhost:4000/mangas/5f825aaf73678f179f3ae761/5f7d0fee21f7750017ff3708
+GET http://localhost:4000/manhwas
 Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDIzNzc4ODJ9.uKRj3Vb_niJt7fXB9C1wsf8fB3x14WQ_KDf79DOcEEA; Max-Age=3; Path=/; Expires=Sun, 11 Oct 2020 00:58:05 GMT; HttpOnly
 
 ###
@@ -67,9 +67,14 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIx
 PATCH  http://localhost:4000/user/lists
 Content-Type: application/json
 
-{
-  "list": "favorite",
-  "userId": "5f8ce61bf386103500a5ccd7",
-  "fileId": "5f651c9630328119891ac0c5",
-  "prevList": "following"
-}
+# {
+#   "list": "following",
+#   "userId": "5f8ce61bf386103500a5ccd7",
+#   "fileId": "5f924a98823c69461a987ad7",
+#   "prevList": null
+# }
+
+###
+
+GET  http://localhost:4000/user/5f8ce61bf386103500a5ccd7/following
+Content-Type: application/json

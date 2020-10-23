@@ -133,6 +133,21 @@ router.patch('/lists', async (req, res)=> {
   }
 })
 
+// get specific user manhwas list
+router.get("/:userId/:list", async (req, res) => {
+  try {
+    await User.findOne({_id: req.params.userId}).
+      populate(`lists.${req.params.list}`).
+      select(`lists.${req.params.list} -_id`).
+      exec((err, list)=>{
+        if(err) return console.log(err)
+        res.json(list)
+    })
+  } catch (err) {
+    console.log(err)
+  }
+});
+
 //logout 
 router.get('/logout', (_req, res)=>{
   res.cookie("auth_token", '', {maxAge: 1}).end()

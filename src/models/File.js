@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const MangasSchema = Schema(
+const FileSchema = Schema(
   {
     title: {
       type: String,
@@ -40,9 +40,13 @@ const MangasSchema = Schema(
     uploader: {
       type: Schema.Types.ObjectId,
       ref: "User",
-    },
+    }
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Manga", MangasSchema);
+module.exports = {
+  Manhwas: mongoose.model("Manhwa", FileSchema),
+  Mangas: mongoose.model("Manga", FileSchema),
+  Novels: mongoose.model("Novel", FileSchema)
+}

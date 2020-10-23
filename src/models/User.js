@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserSchema = Schema(
-  {
+const UserSchema = Schema({
     username: {
       type: String,
       required: true,
@@ -47,24 +46,24 @@ const UserSchema = Schema(
     },
     lists: {
       read: [
-        {type: Schema.Types.ObjectId}
+        {type: Schema.Types.ObjectId, ref: "File"}
       ],
       pending: [
-        {type: Schema.Types.ObjectId}
+        {type: Schema.Types.ObjectId, ref: "File"}
       ],
       following: [
-        {type: Schema.Types.ObjectId}
+        {type: Schema.Types.ObjectId, ref: "File"}
       ],
       favorite: [
-        {type: Schema.Types.ObjectId}
+        {type: Schema.Types.ObjectId, ref: "File"}
       ],
       obtained: [
-        {type: Schema.Types.ObjectId}
+        {type: Schema.Types.ObjectId, ref: "File"}
       ],
       abandoned: [
-        {type: Schema.Types.ObjectId}
-      ]
-    }
+        {type: Schema.Types.ObjectId, ref: "File"}
+      ],
+    },
   },
   { timestamps: true }
 );

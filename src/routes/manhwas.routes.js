@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Manhwas = require("../models/Manhwas");
+const {Manhwas} = require("../models/File");
 const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 
@@ -27,7 +27,7 @@ router.get("/:title", async (req, res) => {
 });
 
 // get specific user uploaded manhwas
-router.get("/user/:userId", async (req, res) => {
+router.get("/:userId", async (req, res) => {
   const manhwas = await Manhwas.find({uploader: req.params.userId})
   res.json( manhwas );
 });

@@ -4,6 +4,37 @@ const File = require("../models/File");
 const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 
+// get all ordered by rating + to -
+router.get("/trending", async (_, res) => {
+  try {
+    const file = await File.find({}).sort( { rating: -1 } )
+    res.json(file);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+//get all by demography and ordered by ratinga + to -
+router.get("/trending/:demography", async (req, res) => {
+  const string = req.params.demography.slice(1, -1)
+  try {
+    const file = await File.find({"demography": {"$regex": string}}).sort( { rating: -1 } )
+    res.json(file);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+// get all most recent
+router.get("/recent", async (_, res) => {
+  try {
+    const file = await File.find({}).sort( { createdAt: -1 } )
+    res.json(file);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 // get all per type
 router.get("/type/:type", async (req, res) => {
   const string = req.params.type.slice(1, -1)
@@ -45,7 +76,7 @@ router.get("/file/:title", async (req, res) => {
 //   res.json( File );
 // });
 
-// submit file
+// submit new file
 router.post("/upload/:userId", verify, async (req, res) => {
   const {
     title,

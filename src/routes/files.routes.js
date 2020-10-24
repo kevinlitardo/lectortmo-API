@@ -4,12 +4,23 @@ const File = require("../models/File");
 const verify = require("../middlewares/verifyToken");
 const User = require("../models/User");
 
-// get all
-router.get("/:type", async (req, res) => {
+// get all per type
+router.get("/type/:type", async (req, res) => {
   const string = req.params.type.slice(1, -1)
-  console.log(string)
   try {
     const file = await File.find({"type": {"$regex": string}});
+    res.json(file);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+// get all per demography
+router.get("/demo/:demography", async (req, res) => {
+  const string = req.params.demography.slice(1)
+  console.log(string)
+  try {
+    const file = await File.find({"demography": {"$regex": string}});
     res.json(file);
   } catch (err) {
     res.json({ message: err });

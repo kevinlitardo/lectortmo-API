@@ -9,9 +9,7 @@ require("dotenv").config();
 app.set("port", process.env.PORT || 4000);
 
 // import routes
-const mangasRoutes = require("./routes/mangas.routes");
-const manhwasRoutes = require("./routes/manhwas.routes");
-const novelsRoutes = require("./routes/novels.routes");
+const filesRoutes = require("./routes/files.routes");
 const authRoute = require("./routes/user.routes");
 
 // middlewares
@@ -19,9 +17,7 @@ app.use(express.urlencoded({limit: '50mb', extended: true }));
 app.use(express.json({limit: '50mb'}));
 app.use(cors());
 app.use(cookieParser());
-app.use("/mangas", mangasRoutes);
-app.use("/manhwas", manhwasRoutes);
-app.use("/novels", novelsRoutes);
+app.use("/api", filesRoutes);
 app.use("/user", authRoute);
 
 // DB connection

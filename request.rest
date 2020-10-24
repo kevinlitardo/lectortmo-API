@@ -2,13 +2,14 @@ GET https://lectortmo-api.herokuapp.com/manhwas
 # Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
 
 ###
-GET http://localhost:4000/logout
+GET http://localhost:4000/api/manhwas
 # Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMjMyNDZ9.NyyUODwCeIMEY1xrmVXvRZbF3FEs7exhIv8JVzlkOwc; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 20:00:50 GMT; HttpOnly; Secure
 
 ###
-GET http://localhost:4000/manhwas/Sister Neighbors
+GET http://localhost:4000/api/file/Sister-Neighbors
 # Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMjMyNDZ9.NyyUODwCeIMEY1xrmVXvRZbF3FEs7exhIv8JVzlkOwc; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 20:00:50 GMT; HttpOnly; Secure
-5f651c9630328119891ac0c5
+
+
 ###
 
 POST http://localhost:4000/user/login
@@ -32,18 +33,18 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:4000/mangas/upload/5f8ce61bf386103500a5ccd7
+POST http://localhost:4000/api/upload/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM0OTEwMjV9.VXZnAM-OS8W4PVKNsMPFr5nbFKijQbfUR862mwghxQc; Max-Age=3; Path=/; Expires=Fri, 23 Oct 2020 22:10:29 GMT; HttpOnly
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM1MTEyMTJ9.StqnPD7lv5jtkNm-5cCwVY1jGhKiVSt0XDsDRNU8xC0; Max-Age=3; Path=/; Expires=Sat, 24 Oct 2020 03:46:56 GMT; HttpOnly
 
 {
-  "title": "prueba de schema nueva 3",
-  "description": "prueba manga",
-  "imageURL": "https://otakuteca.com/images/books/cover/5e711702ab21c.jpg",
+  "title": "Torre de Diosssss",
+  "description": "Existe una torre que si uno tuviera que llegar a la cima, cualquier deseo puede ser concedido. Pero, para ser capaz de subir a la torre, sólo los elegidos pueden entrar y subir hacia la cima. Sin embargo, Baam, sólo un niño, fue capaz de entrar a la torre su único pensamiento era buscar a su querida amiga. Ignorante de su situación, un Guardián de la Torre le dio una opcion a baam. Baam lo único que entendía era que él podría obtener su respuesta en la cima de la torre. Incluso después de su exitoso paso en el primer piso, Baam todavía no se dio cuenta qué tipo de lugar al cual se habia adentrado sólo con el deseo y la ingenuidad, se embarca en un viaje hacia las mortales pruebas de cada piso.",
+  "imageURL": "https://otakuteca.com/images/books/cover/8206_TMOmanga100413.jpg",
   "type": "Manhwa",
-  "demography": "Seinen",
+  "demography": "Shounen",
   "status": "En progreso",
-  "tags": ["Ecchi", "Romance", "Comedia"]
+  "tags": ["Accion", "Aventura", "Fantasia", "Drama", "Comedia", "Misterio"]
 }
 
 
@@ -59,8 +60,8 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIx
 
 ###
 
-GET http://localhost:4000/manhwas
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDIzNzc4ODJ9.uKRj3Vb_niJt7fXB9C1wsf8fB3x14WQ_KDf79DOcEEA; Max-Age=3; Path=/; Expires=Sun, 11 Oct 2020 00:58:05 GMT; HttpOnly
+DELETE http://localhost:4000/api/5f93b1569155d66f39b2f4a5/5f8ce61bf386103500a5ccd7
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM1MTEyMTJ9.StqnPD7lv5jtkNm-5cCwVY1jGhKiVSt0XDsDRNU8xC0; Max-Age=3; Path=/; Expires=Sat, 24 Oct 2020 03:46:56 GMT; HttpOnly
 
 ###
 

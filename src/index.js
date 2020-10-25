@@ -15,7 +15,7 @@ const authRoute = require("./routes/user.routes");
 // middlewares
 app.use(express.urlencoded({limit: '50mb', extended: true }));
 app.use(express.json({limit: '50mb'}));
-app.use(cors({ credentials: true, origin: ["http://localhost:8080", "https://lectortmo.netlify.app/"] }));
+app.use(cors({ credentials: true, origin: ["http://localhost:3000", "https://lectortmo.netlify.app/"] }));
 app.use(cookieParser());
 app.use("/api", filesRoutes);
 app.use("/user", authRoute);

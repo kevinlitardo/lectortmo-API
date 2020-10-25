@@ -58,8 +58,8 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       maxAge: 3600,
       secure: true,
-    });
-    res.status(200).send({username: user.username, id: user._id, userIMG: user.userIMG, lists: user.lists});
+    }).
+    status(200).send({username: user.username, id: user._id, userIMG: user.userIMG, lists: user.lists});
   } catch (error) {
     res.send({ message: error });
   }

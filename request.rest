@@ -12,7 +12,7 @@ GET http://localhost:4000/api/file/Sister-Neighbors
 
 ###
 
-POST https://lectortmo-api.herokuapp.com/user/login
+POST http://localhost:4000/user/login
 Content-Type: application/json
 
 {
@@ -35,16 +35,16 @@ Content-Type: application/json
 
 POST http://localhost:4000/api/upload/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM1MTEyMTJ9.StqnPD7lv5jtkNm-5cCwVY1jGhKiVSt0XDsDRNU8xC0; Max-Age=3; Path=/; Expires=Sat, 24 Oct 2020 03:46:56 GMT; HttpOnly
+Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NTI2NDR9.7OWv3LrzwR6yfF84MgPnOD5xL4s4Xx9okhZreaOC1LE; Max-Age=3; Path=/; Expires=Sun, 25 Oct 2020 19:04:07 GMT; HttpOnly
 
 {
-  "title": "Torre de Diosssss",
-  "description": "Existe una torre que si uno tuviera que llegar a la cima, cualquier deseo puede ser concedido. Pero, para ser capaz de subir a la torre, sólo los elegidos pueden entrar y subir hacia la cima. Sin embargo, Baam, sólo un niño, fue capaz de entrar a la torre su único pensamiento era buscar a su querida amiga. Ignorante de su situación, un Guardián de la Torre le dio una opcion a baam. Baam lo único que entendía era que él podría obtener su respuesta en la cima de la torre. Incluso después de su exitoso paso en el primer piso, Baam todavía no se dio cuenta qué tipo de lugar al cual se habia adentrado sólo con el deseo y la ingenuidad, se embarca en un viaje hacia las mortales pruebas de cada piso.",
-  "imageURL": "https://otakuteca.com/images/books/cover/8206_TMOmanga100413.jpg",
+  "title": "Ballroom e Youkoso",
+  "description": "Tatara Fujita es un estudiante de secundaria que, al no tener un objetivo en la vida, pasa sus días sin hacer nada. Un día se topa con un grupo de delincuentes y estos intentan quitarle su dinero. Un hombre misterioso salva a Fujita y, debido a un malentendido, lo lleva a una clase de baile de salón. Ya en casa, Fujita encuentra en su maletín un DVD que contiene la grabación de un concurso de baile de salón. Embelesado por los bailarines del video y determinado a darle un rumbo a su vida, Fujita toma una decisión: convertirse en un bailarín profesional.",
+  "imageURL": "https://otakuteca.com/images/books/cover/11807_TMOmanga045715.jpg",
   "type": "Manhwa",
-  "demography": "Shounen",
-  "status": "En progreso",
-  "tags": ["Accion", "Aventura", "Fantasia", "Drama", "Comedia", "Misterio"]
+  "demography": "Seinen",
+  "status": "Terminado",
+  "tags": ["Comedia", "Fantasía", "Ecchi", "Ciencia Ficción", "Harem", "Webcomic"]
 }
 
 

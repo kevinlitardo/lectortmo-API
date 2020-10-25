@@ -12,7 +12,7 @@ GET http://localhost:4000/api/file/Sister-Neighbors
 
 ###
 
-POST http://localhost:4000/user/login
+POST https://lectortmo-api.herokuapp.com/user/login
 Content-Type: application/json
 
 {
@@ -68,14 +68,14 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYz
 PATCH  http://localhost:4000/user/lists
 Content-Type: application/json
 
-# {
-#   "list": "following",
-#   "userId": "5f8ce61bf386103500a5ccd7",
-#   "fileId": "5f93565f9cf4e52682463dc2",
-#   "prevList": null
-# }
+{
+  "list": "abandoned",
+  "userId": "5f8ce61bf386103500a5ccd7",
+  "fileId": "5f936b011e203300177c0b7e",
+  "prevList": "abandoned"
+}
 
 ###
 
-GET  http://localhost:4000/user/5f8ce61bf386103500a5ccd7/following
+GET http://localhost:4000/user/5f8ce61bf386103500a5ccd7/abandoned
 Content-Type: application/json

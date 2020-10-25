@@ -124,16 +124,28 @@ router.patch('/lists', async (req, res)=> {
     await user.save()
   }
 
-  try {
-    user.lists[list].push(fileId);
-    await user.save();
-    res.json(user.lists)
-  } catch (error) {
-    res.status(500).send(error)
+  if(list === prevList) {
+    user.lists[list] = user.lists[prevList].filter((id) => id != fileId)
+    try{
+      await user.save()
+      res.json(user.lists).end()
+    } catch (error) {
+      res.status(500).send(error)
+    }
+  }
+
+  if(list !== prevList){
+    try {
+      user.lists[list].push(fileId);
+      await user.save();
+      res.json(user.lists)
+    } catch (error) {
+      res.status(500).send(error)
+    }
   }
 })
 
-// get specific user manhwas list
+// get specific user list
 router.get("/:userId/:list", async (req, res) => {
   try {
     await User.findOne({_id: req.params.userId}).

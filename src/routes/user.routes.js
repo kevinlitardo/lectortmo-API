@@ -58,6 +58,7 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       maxAge: 3600,
       secure: true,
+      sameSite: "none"
     }).
     status(200).send({username: user.username, id: user._id, userIMG: user.userIMG, lists: user.lists});
   } catch (error) {

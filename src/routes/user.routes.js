@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const verify = require("../middlewares/verifyToken");
 const jwt = require("jsonwebtoken");
 const { cloudinary } = require('../utils/cloudinary')
 const {
@@ -85,7 +86,7 @@ router.post("/login", async (req, res) => {
 });
 
 // update user
-router.patch('/update', async (req, res) => {
+router.patch('/update', verify, async (req, res) => {
   const {username, new_password, new_email, image} = req.body
   let updateValues = {}
   if(new_password !== '') {
@@ -101,7 +102,7 @@ router.patch('/update', async (req, res) => {
     if (emailExists) return res.status(400).send("Email already exists");
   if(image !== '') {
     try {
-      const fileStr = req.body.image
+      const fileStr = image
       const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
         upload_preset: 'lectortmo'
       })
@@ -134,7 +135,7 @@ router.patch('/update', async (req, res) => {
 })
 
 // add file to user lists
-router.patch('/lists', async (req, res)=> {
+router.patch('/lists', verify, async (req, res)=> {
   const {fileId, list, userId, prevList} = req.body
 
   const user = await User.findById(userId);
@@ -165,7 +166,7 @@ router.patch('/lists', async (req, res)=> {
 })
 
 // get specific user list
-router.get("/:userId/:list", async (req, res) => {
+router.get("/:userId/:list", verify, async (req, res) => {
   try {
     await User.findOne({_id: req.params.userId}).
       populate(`lists.${req.params.list}`).
@@ -178,10 +179,5 @@ router.get("/:userId/:list", async (req, res) => {
     console.log(err)
   }
 });
-
-//logout 
-router.get('/logout', (_req, res)=>{
-  res.header("auth_token", '').end()
-})
 
 module.exports = router;

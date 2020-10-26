@@ -1,18 +1,8 @@
-GET https://lectortmo-api.herokuapp.com/manhwas
-# Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMTcwODJ9.bnWo0wBgdhcnf27BPizryFFQIbSN6ylYYlqfaIC8w30; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 18:18:06 GMT; HttpOnly
+@local = http://localhost:4000
+@host = https://lectortmo-api.herokuapp.com
+@local-user = http://localhost:4000/user
 
-###
-GET http://localhost:4000/api/trending/seinen
-# Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMjMyNDZ9.NyyUODwCeIMEY1xrmVXvRZbF3FEs7exhIv8JVzlkOwc; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 20:00:50 GMT; HttpOnly; Secure
-
-###
-GET http://localhost:4000/api/file/Sister-Neighbors
-# Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjcxNTE3MjQ3NmU3MTY1NTdiMmY2NDQiLCJpYXQiOjE2MDEzMjMyNDZ9.NyyUODwCeIMEY1xrmVXvRZbF3FEs7exhIv8JVzlkOwc; Max-Age=3; Path=/; Expires=Mon, 28 Sep 2020 20:00:50 GMT; HttpOnly; Secure
-
-
-###
-
-POST https://lectortmo-api.herokuapp.com/user/login
+POST {{local-user}}/login
 Content-Type: application/json
 
 {
@@ -21,8 +11,18 @@ Content-Type: application/json
 }
 
 ###
+POST {{local-user}}/whoiam
+Content-Type: application/json
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
 
-POST http://localhost:4000/user/register
+{
+  "email": "test@test.com",
+  "password": "trestres"
+}
+
+###
+
+POST {{local-user}}/register
 Content-Type: application/json
 
 {
@@ -33,13 +33,13 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:4000/api/upload/5f8ce61bf386103500a5ccd7
+POST {{local}}/api/upload/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NTI2NDR9.7OWv3LrzwR6yfF84MgPnOD5xL4s4Xx9okhZreaOC1LE; Max-Age=3; Path=/; Expires=Sun, 25 Oct 2020 19:04:07 GMT; HttpOnly
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
 
 {
-  "title": "Ballroom e Youkoso",
-  "description": "Tatara Fujita es un estudiante de secundaria que, al no tener un objetivo en la vida, pasa sus días sin hacer nada. Un día se topa con un grupo de delincuentes y estos intentan quitarle su dinero. Un hombre misterioso salva a Fujita y, debido a un malentendido, lo lleva a una clase de baile de salón. Ya en casa, Fujita encuentra en su maletín un DVD que contiene la grabación de un concurso de baile de salón. Embelesado por los bailarines del video y determinado a darle un rumbo a su vida, Fujita toma una decisión: convertirse en un bailarín profesional.",
+  "title": "test file",
+  "description": "test file",
   "imageURL": "https://otakuteca.com/images/books/cover/11807_TMOmanga045715.jpg",
   "type": "Manhwa",
   "demography": "Seinen",
@@ -50,22 +50,22 @@ Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYz
 
 ###
 
-PATCH http://localhost:4000/manhwas/5f839b4cfa3e0224f368efc7/5f7d0fee21f7750017ff3708
+PATCH {{local}}/api/5f963881e1dff562722df984/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjdkMGZlZTIxZjc3NTAwMTdmZjM3MDgiLCJpYXQiOjE2MDI0NjA5MTN9.ZfZJBb6JAJmCFDF5x3-6VC61q3LTSie9n1ujJUnSEf0; Max-Age=3; Path=/; Expires=Mon, 12 Oct 2020 00:01:56 GMT; HttpOnly
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
 
 {
-  "title": "prueba-chapters-title"
+  "title": "prueba cambio"
 }
 
 ###
 
-DELETE http://localhost:4000/api/5f93b1569155d66f39b2f4a5/5f8ce61bf386103500a5ccd7
-Cookie: auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM1MTEyMTJ9.StqnPD7lv5jtkNm-5cCwVY1jGhKiVSt0XDsDRNU8xC0; Max-Age=3; Path=/; Expires=Sat, 24 Oct 2020 03:46:56 GMT; HttpOnly
+DELETE {{local}}/api/5f963881e1dff562722df984/5f8ce61bf386103500a5ccd7
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
 
 ###
 
-PATCH  http://localhost:4000/user/lists
+PATCH  {{local-user}}/lists
 Content-Type: application/json
 
 {
@@ -77,5 +77,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:4000/user/5f8ce61bf386103500a5ccd7/abandoned
+GET {{local-user}}/5f8ce61bf386103500a5ccd7/abandoned
 Content-Type: application/json

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const User = require("../models/User");
-const Users = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { cloudinary } = require('../utils/cloudinary')
@@ -8,6 +7,25 @@ const {
   registerValidation,
   loginValidation,
 } = require("../validation/validation");
+
+router.post('/whoiam', async (req, res) =>{
+  const token = req.header("auth_token");
+  if (!token) return res.status(200).send("No user saved");
+
+  try {
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    
+    const user = await User.findById(verified._id)
+    res.status(200).send({
+      username: user.username, 
+      id: user._id, 
+      userIMG: user.userIMG, 
+      lists: user.lists,
+    })
+  } catch (err) {
+    res.status(400).send("Invalid Token");
+  }
+})
 
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
@@ -25,7 +43,7 @@ router.post("/register", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  const user = new Users({
+  const user = new User({
     username: username,
     email: email,
     password: hashedPassword,
@@ -54,13 +72,13 @@ router.post("/login", async (req, res) => {
   try {
     // create and assign token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.cookie("auth_token", token, {
-      httpOnly: true,
-      maxAge: 3600,
-      secure: true,
-      sameSite: "lax"
-    }).
-    status(200).send({username: user.username, id: user._id, userIMG: user.userIMG, lists: user.lists});
+    res.header("auth_token", token).status(200).send({
+      username: user.username, 
+      id: user._id, 
+      userIMG: user.userIMG, 
+      lists: user.lists,
+      token: token
+    });
   } catch (error) {
     res.send({ message: error });
   }
@@ -163,7 +181,7 @@ router.get("/:userId/:list", async (req, res) => {
 
 //logout 
 router.get('/logout', (_req, res)=>{
-  res.cookie("auth_token", '', {maxAge: 1}).end()
+  res.header("auth_token", '').end()
 })
 
 module.exports = router;

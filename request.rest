@@ -33,6 +33,14 @@ Content-Type: application/json
 
 ###
 
+GET {{local}}/api/type/manga?page=1&limit=10&order=rating
+
+###
+
+GET {{local}}/api/trending?page=1&limit=10&
+
+###
+
 POST {{local}}/api/upload/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
 auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
@@ -67,15 +75,21 @@ auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM
 
 PATCH  {{local-user}}/lists
 Content-Type: application/json
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM3NzQ3NjJ9.ZuRFR_x4ylfNn75StZy-mQnF45jJwhKFy79hIZd5Yrw
 
 {
-  "list": "abandoned",
+  "list": "following",
   "userId": "5f8ce61bf386103500a5ccd7",
-  "fileId": "5f936b011e203300177c0b7e",
-  "prevList": "abandoned"
+  "fileId": "5f95ccad5ac14b15c6201f81",
+  "prevList": null
 }
 
 ###
 
-GET {{local-user}}/5f8ce61bf386103500a5ccd7/abandoned
+GET {{local-user}}/5f8ce61bf386103500a5ccd7/following?page=1&limit=1
 Content-Type: application/json
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM3NzQ3NjJ9.ZuRFR_x4ylfNn75StZy-mQnF45jJwhKFy79hIZd5Yrw
+
+###
+
+GET {{local-user}}/uploads/5f8ce61bf386103500a5ccd7/all

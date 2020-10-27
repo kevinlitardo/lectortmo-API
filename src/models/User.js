@@ -28,19 +28,19 @@ const UserSchema = Schema({
       mangas: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Mangas",
+          ref: "File",
         },
       ],
       manhwas: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Manhwas",
+          ref: "File",
         },
       ],
       novels: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Novels",
+          ref: "File",
         },
       ],
     },

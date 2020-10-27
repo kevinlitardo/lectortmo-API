@@ -2,60 +2,32 @@ const express = require("express");
 const router = express.Router();
 const File = require("../models/File");
 const verify = require("../middlewares/verifyToken");
+const {pagination} = require("../middlewares/pagination");
 const User = require("../models/User");
 
 // get all ordered by rating + to -
-router.get("/trending", async (_, res) => {
-  try {
-    const file = await File.find({}).sort( { rating: -1 } )
-    res.json(file);
-  } catch (err) {
-    res.json({ message: err });
-  }
+router.get("/trending", pagination(File), async (_req, res) => {
+  res.json(res.pagination)
 });
 
 //get all by demography and ordered by ratinga + to -
-router.get("/trending/:demography", async (req, res) => {
-  const string = req.params.demography.slice(1, -1)
-  try {
-    const file = await File.find({"demography": {"$regex": string}}).sort( { rating: -1 } )
-    res.json(file);
-  } catch (err) {
-    res.json({ message: err });
-  }
+router.get("/trending/:demography", pagination(File), async (_req, res) => {
+  res.json(res.pagination)
 });
 
 // get all most recent
-router.get("/recent", async (_, res) => {
-  try {
-    const file = await File.find({}).sort( { createdAt: -1 } )
-    res.json(file);
-  } catch (err) {
-    res.json({ message: err });
-  }
+router.get("/recent", pagination(File), async (_, res) => {
+  res.json(res.pagination);
 });
 
 // get all per type
-router.get("/type/:type", async (req, res) => {
-  const string = req.params.type.slice(1, -1)
-  try {
-    const file = await File.find({"type": {"$regex": string}});
-    res.json(file);
-  } catch (err) {
-    res.json({ message: err });
-  }
+router.get("/type/:type", pagination(File), async (_req, res) => {
+  res.json(res.pagination)
 });
 
 // get all per demography
-router.get("/demo/:demography", async (req, res) => {
-  const string = req.params.demography.slice(1)
-  console.log(string)
-  try {
-    const file = await File.find({"demography": {"$regex": string}});
-    res.json(file);
-  } catch (err) {
-    res.json({ message: err });
-  }
+router.get("/demo/:demography", pagination(File), async (_req, res) => {
+  res.json(res.pagination)
 });
 
 // get specific file
@@ -69,12 +41,6 @@ router.get("/file/:title", async (req, res) => {
     res.json({ message: err });
   }
 });
-
-// get specific user uploaded File
-// router.get("/:userId", async (req, res) => {
-//   const File = await File.find({uploader: req.params.userId})
-//   res.json( File );
-// });
 
 // submit new file
 router.post("/upload/:userId", verify, async (req, res) => {

@@ -86,10 +86,12 @@ auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM
 
 ###
 
-GET {{local-user}}/5f8ce61bf386103500a5ccd7/following?page=1&limit=1
+GET {{local-user}}/5f8ce61bf386103500a5ccd7/following?page=4&limit=1
 Content-Type: application/json
 auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM3NzQ3NjJ9.ZuRFR_x4ylfNn75StZy-mQnF45jJwhKFy79hIZd5Yrw
 
 ###
 
-GET {{local-user}}/uploads/5f8ce61bf386103500a5ccd7/all
+GET {{local-user}}/uploads/5f8ce61bf386103500a5ccd7/mangas?page=1&limit=10
+Content-Type: application/json
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM3NzQ3NjJ9.ZuRFR_x4ylfNn75StZy-mQnF45jJwhKFy79hIZd5Yrw

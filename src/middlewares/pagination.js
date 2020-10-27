@@ -10,7 +10,6 @@ function pagination (model) {
     const startIndex = (page - 1) * limit
     const results = {}
 
-    
     try {
       let filesLength
       let files
@@ -69,6 +68,41 @@ function pagination (model) {
             sort(sort).
             exec()
         }
+      }
+
+      if(reqRoute[0] === ":userId") {
+        const userList = await model.findOne({_id: req.params.userId}).select(`lists.${req.params.list} -_id`)
+        const file = await model.findOne({_id: req.params.userId}).
+          populate({
+            path: `lists.${req.params.list}`,
+            options: {
+              limit: limit,
+              skip: startIndex
+            }
+          }).
+          select(`lists.${req.params.list} -_id`).
+          exec()
+
+        files = file.lists[req.params.list]
+        filesLength = userList.lists[req.params.list].length
+      }
+
+      if(reqRoute[0] === "uploads") {
+        const userList = await model.findOne({_id: req.params.userId}).select(`uploads.${req.params.type} -_id`)
+        const file = await model.findOne({_id: req.params.userId}).
+          populate({
+            path: `uploads.${req.params.type}`,
+            options: {
+              limit: limit,
+              skip: startIndex
+            }
+          }).
+          select(`uploads.${req.params.type} -_id`).
+          sort({title: 1}).
+          exec()
+
+        files = file.uploads[req.params.type]
+        filesLength = userList.uploads[req.params.type].length
       }
 
       const totalPages = filesLength / limit

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const {pagination} = require("../middlewares/pagination");
 const verify = require("../middlewares/verifyToken");
 const jwt = require("jsonwebtoken");
 const { cloudinary } = require('../utils/cloudinary')
@@ -9,6 +10,7 @@ const {
   loginValidation,
 } = require("../validation/validation");
 
+// check for saved frontend token
 router.post('/whoiam', async (req, res) =>{
   const token = req.header("auth_token");
   if (!token) return res.status(200).send("No user saved");
@@ -28,6 +30,7 @@ router.post('/whoiam', async (req, res) =>{
   }
 })
 
+// user register
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -57,6 +60,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// user login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -166,18 +170,13 @@ router.patch('/lists', verify, async (req, res)=> {
 })
 
 // get specific user list
-router.get("/:userId/:list", verify, async (req, res) => {
-  try {
-    await User.findOne({_id: req.params.userId}).
-      populate(`lists.${req.params.list}`).
-      select(`lists.${req.params.list} -_id`).
-      exec((err, list)=>{
-        if(err) return console.log(err)
-        res.json(list)
-    })
-  } catch (err) {
-    console.log(err)
-  }
+router.get("/:userId/:list", [verify, pagination(User)], async (_req, res) => {
+  res.send(res.pagination)
 });
+
+//get user uploads by type
+router.get('/uploads/:userId/:type', [verify, pagination(User)], async (_req, res) => {
+  res.send(res.pagination)
+})
 
 module.exports = router;

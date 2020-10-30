@@ -80,6 +80,33 @@ router.post("/upload/:userId", verify, async (req, res) => {
 
 // edit specific file
 router.patch("/:fileId/:userId", verify, async (req, res) => {
+  const {type} = req.body
+
+  const user = await User.findOne({_id: req.params.userId})
+
+  //remove from old list 
+  if(type) {
+    const lists = Object.keys(user.uploads).splice(1)
+    const values = Object.values(user.uploads).splice(1)
+
+    for (let i = 0; i < 3; i++) {
+      if(values[i].some(id => id == req.params.fileId)){
+        if(lists[i].slice(1, -2) == type.slice(1, -1)) return
+        user.uploads[lists[i]] = values[i].filter(id => id != req.params.fileId)
+      }
+    }
+
+    if(type === "Manga"){
+      user.uploads.mangas.push(req.params.fileId)
+    }
+    if(type === "Manhwa"){
+      user.uploads.manhwas.push(req.params.fileId)
+    }
+    if(type === "Novela"){
+      user.uploads.novels.push(req.params.fileId)
+    }
+  }
+
   try {
     const updatedFile = await File.updateOne(
       {
@@ -89,6 +116,7 @@ router.patch("/:fileId/:userId", verify, async (req, res) => {
         $set: req.body
       }
     );
+    user.save()
     res.json(updatedFile);
   } catch (err) {
     res.json({ message: err });
@@ -107,7 +135,7 @@ router.delete("/:fileId/:userId", verify, async (req, res) => {
   }
 
   try {
-    const removedFile = await File.findByIdAndRemove({
+    const removedFile = await File.deleteOne({
       _id: req.params.fileId,
     });
     user.save()

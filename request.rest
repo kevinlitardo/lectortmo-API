@@ -2,7 +2,7 @@
 @host = https://lectortmo-api.herokuapp.com
 @local-user = http://localhost:4000/user
 
-POST {{local-user}}/login
+POST {{local}}/user/login
 Content-Type: application/json
 
 {
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ###
 
-GET {{local}}/api/type/manga?page=1&limit=10&order=rating
+GET {{host}}/api/trending/seinen?page=1&limit=10&order=rating
 
 ###
 
@@ -43,7 +43,7 @@ GET {{local}}/api/trending?page=1&limit=10&
 
 POST {{local}}/api/upload/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
-auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDQwMzA0MzJ9.KhHKLJzQD2Eio8I20RkOXUgLS8woaUPRoa9SxiKhK38
 
 {
   "title": "test file",
@@ -58,18 +58,19 @@ auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM
 
 ###
 
-PATCH {{local}}/api/5f963881e1dff562722df984/5f8ce61bf386103500a5ccd7
+PATCH {{local}}/api/5f9b8ff162d1632c432f73db/5f8ce61bf386103500a5ccd7
 Content-Type: application/json
-auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDQwMzE3NzR9.dGwXvJZltbzn8TT8hIDmPr4fgFpmxy5TQJIcHuYHvac
 
 {
-  "title": "prueba cambio"
+  "title": "prueba cambioooo",
+  "type": "Manga"
 }
 
 ###
 
-DELETE {{local}}/api/5f963881e1dff562722df984/5f8ce61bf386103500a5ccd7
-auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM2NzkwNzR9._kjqiulxIVqp6r_FLzA6F0vOqw6ca5OFyyXuLaWwDLE
+DELETE {{local}}/api/5f9ba883b4c257437724ff87/5f8ce61bf386103500a5ccd7
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDQwMzE3NzR9.dGwXvJZltbzn8TT8hIDmPr4fgFpmxy5TQJIcHuYHvac
 
 ###
 
@@ -92,6 +93,6 @@ auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM
 
 ###
 
-GET {{local-user}}/uploads/5f8ce61bf386103500a5ccd7/mangas?page=1&limit=10
+GET {{host}}/user/uploads/5f8ce61bf386103500a5ccd7/mangas?page=1&limit=10
 Content-Type: application/json
-auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDM3NzQ3NjJ9.ZuRFR_x4ylfNn75StZy-mQnF45jJwhKFy79hIZd5Yrw
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhjZTYxYmYzODYxMDM1MDBhNWNjZDciLCJpYXQiOjE2MDQwMTU0MjB9.LIsFOxzoyTb11hwud41A_UMla49I7VJlMv7O-_HICpk

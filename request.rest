@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ###
 
-GET {{host}}/api/trending/seinen?page=1&limit=10&order=rating
+GET {{host}}/api/demo/seinen?page=1&limit=12&order=rating
 
 ###
 
